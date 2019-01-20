@@ -1,31 +1,52 @@
 #!/bin/bash
 
+# Start plugins path
 start_pl_path="$PWD/pack/plugins/start"
+# Optional plugins path
 opt_pl_path="$PWD/pack/plugins/opt"
 
-if [[ ! -d "$start_pl_path" && $(basename $PWD) == ".vim" ]]; then
-    mkdir -p "$start_pl_path"
-fi
+# Start plugins
+start_plugins=(
+git://github.com/ctrlpvim/ctrlp.vim.git
+git://github.com/Raimondi/delimitMate.git
+git://github.com/scrooloose/nerdtree.git
+git://github.com/vim-airline/vim-airline.git
+git://github.com/wakatime/vim-wakatime.git
+git://github.com/tpope/vim-fugitive.git
+)
 
-if [[ ! -d "$opt_pl_path" && $(basename $PWD) == ".vim" ]]; then
-    mkdir -p "$opt_pl_path"
+# Optional plugins
+opt_plugins=(
+git://github.com/mattn/emmet-vim.git
+git://github.com/ap/vim-css-color.git
+git://github.com/nvie/vim-flake8.git
+git@github.com:mgedmin/python-imports.vim.git
+)
+
+
+# Creates plugins directory if does't exists
+create_plugin_dir() {
+    [[ ! -d "$start_pl_path" && $(basename $PWD) == ".vim" ]] && mkdir -p "$start_pl_path" || return 1
+    [[ ! -d "$opt_pl_path" && $(basename $PWD) == ".vim" ]] && mkdir -p "$opt_pl_path" || return 1
+}
+
+if ! [[ -d "$start_pl_path" || -d "$opt_pl_path" ]]; then
+    create_plugin_dir
 fi
 
 if [[ $? -eq 0 ]]; then
     cd "$start_pl_path"
-    git clone git://github.com/ctrlpvim/ctrlp.vim.git
-    git clone git://github.com/Raimondi/delimitMate.git
-    git clone git://github.com/scrooloose/nerdtree.git
-    git clone git://github.com/vim-airline/vim-airline.git
-    # git clone git://github.com/vim-airline/vim-airline-themes.git
-    git clone git://github.com/wakatime/vim-wakatime.git
-    git clone git://github.com/tpope/vim-fugitive.git
-    # git clone git://github.com/davidhalter/jedi-vim.git
-    # if [[ $? -eq 0 ]]; then
-    #     (cd "${start_pl_path}/jedi-vim" && git submodule update --init)
-    # fi
+    for plugin in "${start_plugins[@]}"; do
+        pl_basename="${plugin##*/}"
+        if [ ! -d "${pl_basename%.*}" ]; then
+            git clone "$plugin"
+        fi
+    done
     cd "$opt_pl_path"
-    git clone git://github.com/mattn/emmet-vim.git
-    git clone git://github.com/ap/vim-css-color.git
-    git clone git://github.com/nvie/vim-flake8.git
+    for plugin in "${opt_plugins[@]}"; do
+        pl_basename="${plugin##*/}"
+        if [[ ! -d "${pl_basename%.*}" ]]; then
+            git clone "$plugin"
+        fi
+    done
 fi
