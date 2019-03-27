@@ -160,11 +160,32 @@ set wildignore+=*venv/*
 " Open NERDTree with Ctrl+m
 map <C-m> :NERDTreeToggle<CR>
 
+" Fugitive Vim Git wrapper mappings
+nnoremap <Leader>gs :Gstatus<CR>
+nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gc :Gcommit -v<CR>
+nnoremap <Leader>gb :Gblame<CR>
+nnoremap <Leader>gr :Gread<CR>
+nnoremap <Leader>gw :Gwrite<CR>
+nnoremap <Leader>ge :Gedit<CR>
+nnoremap <Leader>gaa :Git add --all<CR>
+nnoremap <Leader>gm :Gmove<Space>
+nnoremap <Leader>grp :Ggrep<Space>
+nnoremap <Leader>gp :Gpush<CR>
+
 " Flake8 - Static syntax and style checker for Python
 " Usage: Open Python file and press F7 to run flake8 on it
 autocmd BufNewFile,BufRead *py
     \ packadd vim-flake8 |
     \ set filetype=python
+
+" Script to help adding import statements in Python modules
+autocmd BufNewFile,BufRead *py
+    \ packadd python-imports.vim |
+    \ set filetype=python
+
+map <F5>    :ImportName<CR>
+map <C-F5>  :ImportNameHere<CR>
 
 " Load Emmet-vim plugin for html and css files
 autocmd FileType html,htmldjango,css packadd emmet-vim
