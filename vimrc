@@ -95,15 +95,18 @@ set incsearch
 set ignorecase
 set smartcase
 
-" Jump between next and previous file when using vimgrep
-noremap <F11> :cnfile<CR>
-noremap <F12> :cpfile<CR>
-
 " Disable stupid backup and swap files - they trigger too many events
 " for file system watchers
 set nobackup
 set nowritebackup
 set noswapfile
+
+" Jump between next and previous file when using vimgrep
+noremap <F11> :cnfile<CR>
+noremap <F12> :cpfile<CR>
+
+" Sort selected words on line
+vnoremap <F3> d:execute 'normal a' . join(sort(split(getreg('"'), ",")), ',')<CR>
 
 " ====================
 " WINDOWS
