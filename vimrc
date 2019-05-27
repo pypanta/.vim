@@ -114,13 +114,20 @@ vnoremap <F3> d:execute 'normal a' . join(sort(split(getreg('"'), ",")), ',')<CR
 set splitbelow
 set splitright
 
-" Switch between split windows
-nmap <C-j> <C-w><C-j>
-nmap <C-k> <C-w><C-k>
-nmap <C-h> <C-w><C-h>
-nmap <C-l> <C-w><C-l>
+" Switching between splitted windows
+nnoremap <C-h> <C-w><C-h>
+nnoremap <C-j> <C-w><C-j>
+nnoremap <C-k> <C-w><C-k>
+nnoremap <C-l> <C-w><C-l>
+" Switching between splitted windows in Terminal mode
+if v:version >= 800
+    tnoremap <C-h> <C-\><C-n><C-w>h
+    tnoremap <C-j> <C-\><C-n><C-w>j
+    tnoremap <C-k> <C-\><C-n><C-w>k
+    tnoremap <C-l> <C-\><C-n><C-w>l
+endif
 
-" Resize split windows
+" Resize splitted windows
 nnoremap <silent> <Leader>= :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 nnoremap <silent> <Leader>0 :exe "vertical resize " . (winwidth(0) * 3/2)<CR>
