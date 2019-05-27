@@ -33,10 +33,8 @@ set wildmenu
 let mapleader = ","
 
 " Removes highlight of your last search
-" ``<C>`` stands for ``CTRL`` and therefore ``<C-n>`` stands for ``CTRL+n``
-noremap <C-n> :nohl<CR>
-vnoremap <C-n> :nohl<CR>
-inoremap <C-n> :nohl<CR>
+" <C> stands for CTRL and therefore <C-l> stands for CTRL+l
+nnoremap <C-n> :nohl<CR>
 
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
