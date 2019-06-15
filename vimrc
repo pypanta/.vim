@@ -150,14 +150,15 @@ nnoremap <space> za
 
 " Bash
 autocmd FileType sh
-    \ iabbrev bash #!/bin/bash<CR>
+    \ iabbrev <buffer> bash #!/bin/bash<CR>
 
 " Django
 autocmd FileType htmldjango
-    \ iabbrev block {% block %}<CR><CR>{% endblock %}<UP> |
-    \ iabbrev content {% block content %}<CR><CR>{% endblock %}<UP> |
-    \ iabbrev for {% for %}<CR><CR>{% endfor %}<UP> |
-    \ iabbrev if {% if %}<CR><CR>{% endif %}<UP> |
+    \ iabbrev <buffer> extends {% extends '' %}|
+    \ iabbrev <buffer> block {% block %}{% endblock %}|
+    \ iabbrev <buffer> content {% block content %}<CR><CR>{% endblock %}<UP>|
+    \ iabbrev <buffer> for {% for %}<CR><CR>{% endfor %}<UP>|
+    \ iabbrev <buffer> if {% if %}<CR><CR>{% endif %}<UP>|
 
 " ====================
 "   PLUGINS SETTINGS
