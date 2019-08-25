@@ -57,7 +57,7 @@ filetype plugin indent on
 syntax on
 
 " Showing line numbers and length
-set relativenumber " show the line number relative to the line with the cursor
+set number relativenumber " show the line number relative to the line with the cursor
 set textwidth=79 " maximum width of text that is being inserted
 set nowrap " don't automatically wrap on load
 set fo-=t " don't automatically wrap text when typing
