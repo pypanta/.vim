@@ -99,13 +99,6 @@ set nobackup
 set nowritebackup
 set noswapfile
 
-" Jump between next and previous file when using vimgrep
-noremap <F11> :cnfile<CR>
-noremap <F12> :cpfile<CR>
-
-" Sort selected words on line
-vnoremap <F3> d:execute 'normal a' . join(sort(split(getreg('"'), ",")), ',')<CR>
-
 " ====================
 " WINDOWS
 " ====================
@@ -159,6 +152,25 @@ autocmd FileType htmldjango
     \ iabbrev <buffer> content {% block content %}<CR><CR>{% endblock %}<UP>|
     \ iabbrev <buffer> for {% for %}<CR><CR>{% endfor %}<UP>|
     \ iabbrev <buffer> if {% if %}<CR><CR>{% endif %}<UP>|
+
+" ====================
+" SEARCHING
+" ====================
+
+" Grep word under the cursor in the current file
+:nnoremap gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj %" <Bar> cw<CR>
+" Grep word under the cursor recursively
+:nnoremap Gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj **/*" <Bar> cw<CR>
+" Jump between next and previous file when using vimgrep
+noremap <F11> :cnfile<CR>
+noremap <F12> :cpfile<CR>
+
+" ====================
+" SORTING
+" ====================
+
+" Sort selected words on line
+vnoremap <F3> d:execute 'normal a' . join(sort(split(getreg('"'), ",")), ',')<CR>
 
 " ====================
 "   PLUGINS SETTINGS
