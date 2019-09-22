@@ -158,9 +158,9 @@ autocmd FileType htmldjango
 " ====================
 
 " Grep word under the cursor in the current file
-:nnoremap gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj %" <Bar> cw<CR>
+nnoremap gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj %" <Bar> cw<CR>
 " Grep word under the cursor recursively
-:nnoremap Gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj **/*" <Bar> cw<CR>
+nnoremap Gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj **/*" <Bar> cw<CR>
 " Jump between next and previous file when using vimgrep
 noremap <F11> :cnfile<CR>
 noremap <F12> :cpfile<CR>
@@ -169,8 +169,11 @@ noremap <F12> :cpfile<CR>
 " SORTING
 " ====================
 
-" Sort selected words on line
-vnoremap <F3> d:execute 'normal a' . join(sort(split(getreg('"'), ",")), ',')<CR>
+" Sort selected comma separated words
+" vnoremap <F3> d:execute 'normal a' . join(sort(split(getreg('"'), ",")), ',')<CR>
+vnoremap <F3> :s/\%V.*\%V\@!/\=join(sort(split(submatch(0), '\s*,\s*')), ', ')<CR>
+" Globally sort comma separated words after word "import"
+nnoremap <F3> :%s/import\s*\zs.*/\=join(sort(split(submatch(0), '\s*,\s*')),', ')<CR>
 
 " ====================
 "   PLUGINS SETTINGS
@@ -218,10 +221,9 @@ autocmd BufNewFile,BufRead *py
 " Script to help adding import statements in Python modules
 autocmd BufNewFile,BufRead *py
     \ packadd python-imports.vim |
-    \ set filetype=python
-
-map <F5>    :ImportName<CR>
-map <C-F5>  :ImportNameHere<CR>
+    \ set filetype=python |
+    \ nnoremap <F5> :ImportName<CR> |
+    \ nnoremap <Leader><F5> :ImportNameHere<CR>
 
 " Load Emmet-vim plugin for html and css files
 autocmd FileType html,htmldjango,css packadd emmet-vim
