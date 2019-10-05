@@ -29,6 +29,9 @@ set cursorcolumn
 " Show wildmenu for completion, when press TAB the possible matches are shown
 set wildmenu
 
+" Set dictionary completion
+:set dictionary+=/usr/share/dict/words
+
 " Rebind <Leader> key
 let mapleader = ","
 
