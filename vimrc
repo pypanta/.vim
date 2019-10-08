@@ -102,6 +102,14 @@ set nobackup
 set nowritebackup
 set noswapfile
 
+" Automatically read a file in memory again if it has been detected to have
+" changed from outside of Vim
+set autoread
+
+" This option helps to avoid all the "hit-enter" prompts caused by file
+" messages
+set shortmess=atI
+
 " ====================
 " WINDOWS
 " ====================
@@ -188,6 +196,7 @@ let g:airline_powerline_fonts = 1
 
 " Settings for ctrlp
 let g:ctrlp_max_height = 30
+let g:ctrlp_working_path_mode = 0
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
@@ -210,10 +219,10 @@ nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>ge :Gedit<CR>
-nnoremap <Leader>gaa :Git add --all<CR>
+nnoremap <Leader>gaa :Git add --all<CR><CR>
 nnoremap <Leader>gm :Gmove<Space>
 nnoremap <Leader>grp :Ggrep<Space>
-nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gp :Gpush<CR><CR>
 
 " Flake8 - Static syntax and style checker for Python
 " Usage: Open Python file and press F7 to run flake8 on it
