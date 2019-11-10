@@ -30,7 +30,10 @@ set cursorcolumn
 set wildmenu
 
 " Set dictionary completion
-:set dictionary+=/usr/share/dict/words
+autocmd FileType text,markdown,html
+    \ setlocal dictionary+=/usr/share/dict/words
+autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
+inoremap <F12> <C-x><C-k>
 
 " Rebind <Leader> key
 let mapleader = ","
@@ -108,7 +111,7 @@ set autoread
 
 " This option helps to avoid all the "hit-enter" prompts caused by file
 " messages
-set shortmess=atI
+set shortmess=aoOtIF
 
 " ====================
 " WINDOWS
@@ -208,8 +211,11 @@ set wildignore+=*venv/*
 "let g:jedi#popup_select_first = 0
 "map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
+" NERDTree settings
 " Open NERDTree with Ctrl+m
 map <C-m> :NERDTreeToggle<CR>
+" Enable line numbers
+let NERDTreeShowLineNumbers=1
 
 " Fugitive Vim Git wrapper mappings
 nnoremap <Leader>gs :Gstatus<CR>
@@ -222,7 +228,7 @@ nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gaa :Git add --all<CR><CR>
 nnoremap <Leader>gm :Gmove<Space>
 nnoremap <Leader>grp :Ggrep<Space>
-nnoremap <Leader>gp :Gpush<CR><CR>
+nnoremap <Leader>gp :Gpush<CR>
 
 " Flake8 - Static syntax and style checker for Python
 " Usage: Open Python file and press F7 to run flake8 on it
