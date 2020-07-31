@@ -43,8 +43,10 @@ let mapleader = ","
 nnoremap <C-n> :nohl<CR>
 
 " easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
+nnoremap <Leader>tn :tabnew<CR>
+nnoremap <Leader>tc :tabclose<CR>
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
@@ -86,12 +88,16 @@ set shiftround
 set expandtab
 
 " Set two spaces indention for HTML, CSS, JavaScript files
-autocmd FileType html,htmldjango,css,javascript
+autocmd FileType html,htmldjango,css,javascript,vue
     \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
 
 " Set htmldjango as default file type for HTML files
 autocmd FileType html
     \ setlocal filetype=htmldjango
+
+" Set vue.html as default file type for vuejs files
+autocmd FileType vue
+    \ setlocal filetype=vue.html
 
 " Make search case insensitive
 set hlsearch
@@ -111,7 +117,7 @@ set autoread
 
 " This option helps to avoid all the "hit-enter" prompts caused by file
 " messages
-set shortmess=aoOtIF
+set shortmess=aoOtTIF
 
 " ====================
 " WINDOWS
@@ -161,11 +167,12 @@ autocmd FileType sh
 
 " Django
 autocmd FileType htmldjango
-    \ iabbrev <buffer> extends {% extends '' %}|
+    \ iabbrev <buffer> extends {% extends '' %}<CR><CR>{% block title %}{% endblock %}<CR><CR>{% block content %}<CR>{% endblock %}<LEFT>|
     \ iabbrev <buffer> block {% block %}{% endblock %}|
-    \ iabbrev <buffer> content {% block content %}<CR><CR>{% endblock %}<UP>|
     \ iabbrev <buffer> for {% for %}<CR><CR>{% endfor %}<UP>|
     \ iabbrev <buffer> if {% if %}<CR><CR>{% endif %}<UP>|
+    \ iabbrev <buffer> include {% include '' %}|
+    \ iabbrev <buffer> load {% load %}|
 
 " ====================
 " SEARCHING
@@ -175,9 +182,15 @@ autocmd FileType htmldjango
 nnoremap gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj %" <Bar> cw<CR>
 " Grep word under the cursor recursively
 nnoremap Gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj **/*" <Bar> cw<CR>
+" Quickfix window use <CR> to jump to the file under the cursor,
+" so undefine the mapping there
+autocmd BufReadPost quickfix nnoremap <buffer> <CR> <CR>
 " Jump between next and previous file when using vimgrep
 noremap <F11> :cnfile<CR>
 noremap <F12> :cpfile<CR>
+
+" Search tags
+nnoremap <Leader>t :tag<space>
 
 " ====================
 " SORTING
@@ -190,6 +203,13 @@ vnoremap <F3> :s/\%V.*\%V\@!/\=join(sort(split(submatch(0), '\s*,\s*')), ', ')<C
 nnoremap <F3> :%s/import\s*\zs.*/\=join(sort(split(submatch(0), '\s*,\s*')),', ')<CR>
 
 " ====================
+" OTHER MAPPINGS
+" ====================
+
+" Open vimrc file
+nnoremap <Leader>vc :tabnew ~/.vim/vimrc<CR>
+
+" ====================
 "   PLUGINS SETTINGS
 " ====================
 
@@ -197,13 +217,15 @@ nnoremap <F3> :%s/import\s*\zs.*/\=join(sort(split(submatch(0), '\s*,\s*')),', '
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
 
-" Settings for ctrlp
+" Settings for CtrlP
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
 set wildignore+=*.pyc
 set wildignore+=*_build/*
 set wildignore+=*/coverage/*
 set wildignore+=*venv/*
+" Search for a tag in the current buffer
+nnoremap <Leader>st :CtrlPBufTag<CR>
 
 " Settings for jedi-vim
 "let g:jedi#usages_command = "<leader>z"
@@ -213,7 +235,7 @@ set wildignore+=*venv/*
 
 " NERDTree settings
 " Open NERDTree with Ctrl+m
-map <C-m> :NERDTreeToggle<CR>
+nnoremap <C-m> :NERDTreeToggle<CR>
 " Enable line numbers
 let NERDTreeShowLineNumbers=1
 
@@ -244,7 +266,7 @@ autocmd BufNewFile,BufRead *py
     \ nnoremap <Leader><F5> :ImportNameHere<CR>
 
 " Load Emmet-vim plugin for html and css files
-autocmd FileType html,htmldjango,css packadd emmet-vim
+autocmd FileType html,htmldjango,css,vue packadd emmet-vim
 
 " CSS color name highlighter
 autocmd BufNewFile,BufRead *css
