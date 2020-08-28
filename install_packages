@@ -11,7 +11,7 @@ git://github.com/ctrlpvim/ctrlp.vim.git
 git://github.com/Raimondi/delimitMate.git
 git://github.com/scrooloose/nerdtree.git
 git://github.com/vim-airline/vim-airline.git
-git://github.com/wakatime/vim-wakatime.git
+# git://github.com/wakatime/vim-wakatime.git
 git://github.com/tpope/vim-fugitive.git
 )
 
