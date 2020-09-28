@@ -174,6 +174,10 @@ autocmd FileType htmldjango
     \ iabbrev <buffer> include {% include '' %}|
     \ iabbrev <buffer> load {% load %}|
 
+" Vue JS
+autocmd FileType vue.html
+    \ iabbrev <buffer> vdata data() {<CR><TAB>return {<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>
+
 " ====================
 " SEARCHING
 " ====================
@@ -220,10 +224,7 @@ let g:airline_powerline_fonts = 1
 " Settings for CtrlP
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-set wildignore+=*venv/*
+set wildignore+=*.pyc,*_build/*,*/coverage/*,*/venv/*,*/node_modules/*
 " Search for a tag in the current buffer
 nnoremap <Leader>st :CtrlPBufTag<CR>
 
@@ -241,16 +242,19 @@ let NERDTreeShowLineNumbers=1
 
 " Fugitive Vim Git wrapper mappings
 nnoremap <Leader>gs :Gstatus<CR>
-nnoremap <Leader>gd :Gdiff<CR>
+nnoremap <Leader>gaa :Git add --all<CR><CR>
 nnoremap <Leader>gc :Gcommit -v<CR>
+nnoremap <Leader>gp :Gpush<CR>
+nnoremap <Leader>gl :Glog<CR>
+nnoremap <Leader>gla :Glog --<CR>
+nnoremap <Leader>glc :Glog -- %<CR>
+nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gr :Gread<CR>
 nnoremap <Leader>gw :Gwrite<CR>
 nnoremap <Leader>ge :Gedit<CR>
-nnoremap <Leader>gaa :Git add --all<CR><CR>
 nnoremap <Leader>gm :Gmove<Space>
 nnoremap <Leader>grp :Ggrep<Space>
-nnoremap <Leader>gp :Gpush<CR>
 
 " Flake8 - Static syntax and style checker for Python
 " Usage: Open Python file and press F7 to run flake8 on it
