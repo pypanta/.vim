@@ -175,8 +175,14 @@ autocmd FileType htmldjango
     \ iabbrev <buffer> load {% load %}|
 
 " Vue JS
-autocmd FileType vue.html
-    \ iabbrev <buffer> vdata data() {<CR><TAB>return {<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>
+autocmd FileType vue
+    \ iabbrev <buffer> vdata data() {<CR><TAB>return {<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
+    \ iabbrev <buffer> vcomp computed: {<CR><TAB>fnName() {<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
+    \ iabbrev <buffer> vmet methods: {<CR><TAB>fnName() {<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
+    \ iabbrev <buffer> vcreat created() {<CR>},|
+    \ iabbrev <buffer> vwatd watch: {<CR><TAB>data: {<CR><TAB>imeddiate: true,<CR><TAB>deep: true,<CR>handler(newValue, oldValue) {<CR>}<CR>}<CR>},|
+    \ iabbrev <buffer> vfil filters: {<CR><TAB>fnName: function(value) {<CR><TAB>return value;<CR>}<CR>},|
+    \ iabbrev <buffer> vprop props: {<CR><TAB>propName: {<CR><TAB>type: ,<CR><TAB>default:<CR>},<CR>},|
 
 " ====================
 " SEARCHING
@@ -224,7 +230,11 @@ let g:airline_powerline_fonts = 1
 " Settings for CtrlP
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
-set wildignore+=*.pyc,*_build/*,*/coverage/*,*/venv/*,*/node_modules/*
+" set wildignore+=*.pyc,*_build/*,*/coverage/*,*/venv/*,*/node_modules/*
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|venv|coverage|node_modules|_build)$',
+  \ 'file': '\v\.(pyc|so)$',
+  \ }
 " Search for a tag in the current buffer
 nnoremap <Leader>st :CtrlPBufTag<CR>
 
