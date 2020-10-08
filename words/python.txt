@@ -2659,6 +2659,7 @@ get_objects
 getopt
 GetoptError
 get_or_404
+get_or_create
 getouterframes
 get_param
 get_params
@@ -6468,6 +6469,7 @@ TokenError
 TokenInfo
 tokenize
 tok_name
+tolist
 toml
 tomlkit
 tomono
@@ -6481,6 +6483,7 @@ tostring
 total_ordering
 total_seconds
 total_size
+totuple
 touch
 tounicode
 ToUnicode
