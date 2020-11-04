@@ -3,7 +3,10 @@
 "=====================
 
 " Auto reload .vimrc file
-autocmd! bufwritepost ~/.vim/vimrc source %
+augroup reload_vimrc
+    autocmd!
+    autocmd! bufwritepost ~/.vim/vimrc source %
+augroup END
 
 " Sets the character encoding used inside Vim
 set encoding=utf-8
@@ -29,12 +32,6 @@ set cursorcolumn
 " Show wildmenu for completion, when press TAB the possible matches are shown
 set wildmenu
 
-" Set dictionary completion
-autocmd FileType text,markdown,html
-    \ setlocal dictionary+=/usr/share/dict/words
-autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
-inoremap <F12> <C-x><C-k>
-
 " Rebind <Leader> key
 let mapleader = ","
 
@@ -50,8 +47,11 @@ nnoremap <Leader>tc :tabclose<CR>
 
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup show_whitespace
+    autocmd!
+    autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
+    autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+augroup END
 
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
@@ -88,16 +88,18 @@ set shiftround
 set expandtab
 
 " Set two spaces indention for HTML, CSS, JavaScript files
-autocmd FileType html,htmldjango,css,javascript,vue
-    \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup filetype_indention
+    autocmd!
+    autocmd FileType html,htmldjango,css,javascript,vue
+        \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
 
 " Set htmldjango as default file type for HTML files
-autocmd FileType html
-    \ setlocal filetype=htmldjango
-
-" Set vue.html as default file type for vuejs files
-autocmd FileType vue
-    \ setlocal filetype=vue.html
+augroup html_filetype
+    autocmd!
+    autocmd FileType html
+        \ setlocal filetype=htmldjango
+augroup END
 
 " Make search case insensitive
 set hlsearch
@@ -161,28 +163,7 @@ nnoremap <space> za
 " ABBREVIATIONS
 " ====================
 
-" Bash
-autocmd FileType sh
-    \ iabbrev <buffer> bash #!/bin/bash<CR>
-
-" Django
-autocmd FileType htmldjango
-    \ iabbrev <buffer> extends {% extends '' %}<CR><CR>{% block title %}{% endblock %}<CR><CR>{% block content %}<CR>{% endblock %}<LEFT>|
-    \ iabbrev <buffer> block {% block %}{% endblock %}|
-    \ iabbrev <buffer> for {% for %}<CR><CR>{% endfor %}<UP>|
-    \ iabbrev <buffer> if {% if %}<CR><CR>{% endif %}<UP>|
-    \ iabbrev <buffer> include {% include '' %}|
-    \ iabbrev <buffer> load {% load %}|
-
-" Vue JS
-autocmd FileType vue
-    \ iabbrev <buffer> vdata data() {<CR><TAB>return {<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
-    \ iabbrev <buffer> vcomp computed: {<CR><TAB>fnName() {<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
-    \ iabbrev <buffer> vmet methods: {<CR><TAB>fnName() {<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
-    \ iabbrev <buffer> vcreat created() {<CR>},|
-    \ iabbrev <buffer> vwatd watch: {<CR><TAB>data: {<CR><TAB>imeddiate: true,<CR><TAB>deep: true,<CR>handler(newValue, oldValue) {<CR>}<CR>}<CR>},|
-    \ iabbrev <buffer> vfil filters: {<CR><TAB>fnName: function(value) {<CR><TAB>return value;<CR>}<CR>},|
-    \ iabbrev <buffer> vprop props: {<CR><TAB>propName: {<CR><TAB>type: ,<CR><TAB>default:<CR>},<CR>},|
+runtime snippets.vim
 
 " ====================
 " SEARCHING
@@ -211,6 +192,29 @@ nnoremap <Leader>t :tag<space>
 vnoremap <F3> :s/\%V.*\%V\@!/\=join(sort(split(submatch(0), '\s*,\s*')), ', ')<CR>
 " Globally sort comma separated words after word "import"
 nnoremap <F3> :%s/import\s*\zs.*/\=join(sort(split(submatch(0), '\s*,\s*')),', ')<CR>
+
+" ====================
+" COMPLETIONS
+" ====================
+
+" Set dictionary completion
+augroup dictionary_completion
+    autocmd!
+    autocmd FileType text,markdown,html
+        \ setlocal dictionary+=/usr/share/dict/words
+    autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
+    inoremap <F12> <C-x><C-k>
+augroup END
+
+" ====================
+" DOCUMENTATIONS
+" ====================
+
+" Use PyDoc instead of man to lookup the keyword under the cursor
+augroup pydoc
+    autocmd!
+    autocmd BufNewFile,BufRead *py set keywordprg=/usr/bin/pydoc3
+augroup END
 
 " ====================
 " OTHER MAPPINGS
@@ -266,23 +270,37 @@ nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gm :Gmove<Space>
 nnoremap <Leader>grp :Ggrep<Space>
 
-" Flake8 - Static syntax and style checker for Python
-" Usage: Open Python file and press F7 to run flake8 on it
-autocmd BufNewFile,BufRead *py
-    \ packadd vim-flake8 |
-    \ set filetype=python
+" Load optional plugins
+augroup load_plugins
+    autocmd!
+    " Flake8 - Static syntax and style checker for Python
+    " Usage: Open Python file and press F7 to run flake8 on it
+    " Python-Imports - Script to help adding import statements in Python modules
+    " Python-Syntax - Python syntax highlighting for Vim
+    autocmd BufNewFile,BufRead *py
+        \ packadd vim-flake8 |
+        \ packadd python-imports.vim |
+        \ nnoremap <F5> :ImportName<CR> |
+        \ nnoremap <Leader><F5> :ImportNameHere<CR> |
+        \ packadd python-syntax |
+        \ let g:python_highlight_all = 1 |
+        \ set filetype=python
 
-" Script to help adding import statements in Python modules
-autocmd BufNewFile,BufRead *py
-    \ packadd python-imports.vim |
-    \ set filetype=python |
-    \ nnoremap <F5> :ImportName<CR> |
-    \ nnoremap <Leader><F5> :ImportNameHere<CR>
+    " Load Emmet-vim plugin for html and css files
+    autocmd FileType html,htmldjango,css,vue packadd emmet-vim
 
-" Load Emmet-vim plugin for html and css files
-autocmd FileType html,htmldjango,css,vue packadd emmet-vim
+    " CSS color name highlighter
+    autocmd BufNewFile,BufRead *css
+        \ packadd vim-css-color |
+        \ set filetype=css
 
-" CSS color name highlighter
-autocmd BufNewFile,BufRead *css
-    \ packadd vim-css-color |
-    \ set filetype=css
+    " JavaScript syntax highlighting and improved indentation
+    autocmd BufNewFile,BufRead *js
+        \ packadd vim-javascript |
+        \ set filetype=javascript
+
+    " Vim syntax highlighting for Vue components
+    autocmd BufNewFile,BufRead *vue
+        \ packadd vim-javascript |
+        \ set filetype=vue.html
+augroup END
