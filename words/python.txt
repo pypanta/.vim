@@ -84,6 +84,9 @@ __add__
 add
 Add
 add_alias
+add_argument
+add_argument_group
+add_arguments
 add_charset
 addCleanup
 add_codec
@@ -102,6 +105,7 @@ add_header
 ADDITEMS
 add_label
 addLevelName
+add_mutually_exclusive_group
 AddPackagePath
 Address
 address_exclude
@@ -116,14 +120,17 @@ AddressValueError
 add_section
 add_sequence
 addSkip
+add_subparsers
 addSubTest
 addSuccess
 addTest
 addTests
+add_text
 add_to_class
 add_type
 addTypeEqualityFunc
 addUnexpectedSuccess
+add_usage
 A_DIM
 adjusted
 adler32
@@ -453,6 +460,7 @@ AuthenticationString
 authenticators
 __author__
 AUTH_PASSWORD_VALIDATORS
+authtoken
 AUTH_USER_MODEL
 auto
 AUTOCOMMIT
@@ -1150,6 +1158,7 @@ controlnames
 ContStr
 ConversionSyntax
 convert
+convert_arg_line_to_args
 converter
 ConverterMapping
 converters
@@ -1450,6 +1459,7 @@ DEFAULT_PAGINATION_CLASS
 DEFAULT_PERMISSION_CLASSES
 DEFAULT_PROTOCOL
 default_request_version
+DefaultRouter
 __defaults__
 defaults
 DEFAULTSECT
@@ -1863,6 +1873,7 @@ end_headers
 ENDMARKER
 EndOfBlock
 endpats
+end_section
 endswith
 endtagfind
 endwin
@@ -2207,6 +2218,7 @@ filter
 Filter
 FILTER_ARM
 FILTER_ARMTHUMB
+filter_backends
 filter_by
 filter_class
 FILTER_DELTA
@@ -2309,6 +2321,7 @@ foo
 for
 For
 FORBIDDEN
+force_authenticate
 FORCE_SCRIPT_NAME
 ForeignKey
 forget
@@ -2339,6 +2352,7 @@ formatException
 format_exception_only
 formatFooter
 formatHeader
+format_help
 format_helpers
 format_list
 format_map
@@ -2357,6 +2371,7 @@ FormattedValue
 formatter
 Formatter
 formatTime
+format_usage
 FORMAT_VALUE
 format_version
 formatwarning
@@ -2444,6 +2459,7 @@ FullArgSpec
 fullmatch
 F_ULOCK
 __func__
+func
 FunctionDef
 FunctionTestCase
 FunctionType
@@ -2556,6 +2572,7 @@ get_data
 get_date
 get_debug
 getdecoder
+get_default
 get_default_domain
 getdefaultencoding
 getdefaultlocale
@@ -2726,6 +2743,10 @@ get_suffixes
 getswitchinterval
 getsyx
 get_tag
+gettempdir
+gettempdirb
+gettempprefix
+gettempprefixb
 getter
 GETTERCRE
 get_terminal_size
@@ -2925,6 +2946,7 @@ HTTP_201_CREATED
 HTTP_204_NO_CONTENT
 HTTP_400_BAD_REQUEST
 HTTP_401_UNAUTHORIZED
+HTTP_403_FORBIDDEN
 Http404
 HTTP_404_NOT_FOUND
 HTTP_AUTHORIZATION
@@ -4106,9 +4128,12 @@ MissingSectionHeaderError
 mixins
 mkd
 mkdir
+mkdtemp
 mkfifo
 mknod
 mksalt
+mkstemp
+mktemp
 mktime
 mktime_tz
 mlsd
@@ -4239,6 +4264,7 @@ Name
 NAME
 name2codepoint
 NameConstant
+NamedTemporaryFile
 namedtuple
 NamedTuple
 NamedTupleMeta
@@ -4577,6 +4603,7 @@ parse227
 parse229
 parse257
 parseaddr
+parse_args
 parseArgs
 parse_bogus_comment
 parse_comment
@@ -4591,6 +4618,9 @@ ParseFlags
 parse_header
 parse_headers
 parse_html_declaration
+parse_intermixed_args
+parse_known_args
+parse_known_intermixed_args
 parseline
 parse_marked_section
 parse_multipart
@@ -4800,6 +4830,7 @@ printErrors
 print_exc
 print_exception
 print_form
+print_help
 print_last
 print_line
 print_list
@@ -4810,6 +4841,7 @@ print_stack_trace
 print_stats
 print_tb
 print_topics
+print_usage
 PRIO_PGRP
 PRIO_PROCESS
 PriorityQueue
@@ -5046,6 +5078,7 @@ readonly
 ReadOnlyField
 read_only_fields
 readonly_fields
+ReadOnlyModelViewSet
 readPlist
 readPlistFromBytes
 read_single
@@ -5505,6 +5538,7 @@ set_date
 set_debug
 set_debuglevel
 setdefault
+set_defaults
 setdefaulttimeout
 set_default_type
 setdlopenflags
@@ -5996,6 +6030,7 @@ splitdrive
 splitext
 SplitHiddenDateTimeWidget
 splitlines
+SpooledTemporaryFile
 spwd
 SQLAlchemy
 SQLALCHEMY_DATABASE_URI
@@ -6051,6 +6086,7 @@ starmapstar
 Starred
 StartBoundaryNotFoundDefect
 start_color
+start_section
 start_server
 startswith
 starttagopen
@@ -6158,6 +6194,7 @@ stringnl_noescape
 stringnl_noescape_pair
 StringPrefix
 stringprep
+StringRelatedField
 StringTemplateStyle
 strip
 strong
@@ -6311,6 +6348,7 @@ tearDownClass
 tee
 tell
 telnetlib
+tempdir
 tempfile
 template
 Template
@@ -6321,6 +6359,8 @@ TemplateResponseMixin
 templates
 TEMPLATES
 TemplateView
+TemporaryDirectory
+TemporaryFile
 TEMPORARY_REDIRECT
 termattrs
 terminal_size
@@ -6801,6 +6841,7 @@ version_string
 View
 view_name
 views
+ViewSet
 viewsets
 view_type
 view_types
@@ -6992,3 +7033,4 @@ Z_PARTIAL_FLUSH
 Z_RLE
 Z_SYNC_FLUSH
 Z_TREES
+reveal_type

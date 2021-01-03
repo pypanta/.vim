@@ -22,7 +22,7 @@ git@github.com:nvie/vim-flake8.git
 git@github.com:mgedmin/python-imports.vim.git
 git@github.com:vim-python/python-syntax.git
 git@github.com:pangloss/vim-javascript.git
-git@github.com:posva/vim-vue.git
+# git@github.com:posva/vim-vue.git
 )
 
 

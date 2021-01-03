@@ -42,6 +42,7 @@ nnoremap <C-n> :nohl<CR>
 " easier moving between tabs
 nnoremap <Leader>n <esc>:tabprevious<CR>
 nnoremap <Leader>m <esc>:tabnext<CR>
+nnoremap <silent> <Leader>tm :exe "tabmove" nr2char(getchar())<CR>
 nnoremap <Leader>tn :tabnew<CR>
 nnoremap <Leader>tc :tabclose<CR>
 
@@ -169,6 +170,9 @@ runtime snippets.vim
 " SEARCHING
 " ====================
 
+" Ignore one of these patterns when expanding wildcards
+set wildignore+=*.pyc,*/_build/**,*/coverage/**,*/venv/*,*/node_modules/**
+
 " Grep word under the cursor in the current file
 nnoremap gr :execute "vimgrep /\\C\\<" . expand("<cword>") . "\\>/gj %" <Bar> cw<CR>
 " Grep word under the cursor recursively
@@ -220,6 +224,10 @@ augroup END
 " OTHER MAPPINGS
 " ====================
 
+"Make it easier to indent a visual selection several times.
+xnoremap > >gv
+xnoremap < <gv
+
 " Open vimrc file
 nnoremap <Leader>vc :tabnew ~/.vim/vimrc<CR>
 
@@ -234,9 +242,8 @@ let g:airline_powerline_fonts = 1
 " Settings for CtrlP
 let g:ctrlp_max_height = 30
 let g:ctrlp_working_path_mode = 0
-" set wildignore+=*.pyc,*_build/*,*/coverage/*,*/venv/*,*/node_modules/*
 let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|venv|coverage|node_modules|_build)$',
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|venv|coverage|node_modules|_build|target)$',
   \ 'file': '\v\.(pyc|so)$',
   \ }
 " Search for a tag in the current buffer
