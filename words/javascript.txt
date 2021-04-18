@@ -112,6 +112,7 @@ slice
 small
 some
 sort
+splice
 split
 sqrt
 strike

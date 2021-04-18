@@ -22,8 +22,9 @@ augroup abbreviations
         \<CR><CR>{% block content %}
         \<CR>{% endblock %}<LEFT>|
         \ iabbrev <buffer> block {% block %}{% endblock %}|
-        \ iabbrev <buffer> for {% for %}<CR>{% endfor %}<UP>|
         \ iabbrev <buffer> if {% if %}<CR>{% endif %}<UP>|
+        \ iabbrev <buffer> for {% for %}<CR>{% endfor %}<UP>|
+        \ iabbrev <buffer> with {% with %}<CR>{% endwith %}<UP>|
         \ iabbrev <buffer> include {% include '' %}|
         \ iabbrev <buffer> load {% load %}|
         \ iabbrev <buffer> urld {% url '' %}|
@@ -45,12 +46,17 @@ augroup abbreviations
 
     " Vue JS
     autocmd FileType vue,javascript
+        \ iabbrev <buffer> vtemp <template><CR></template><CR><CR>
+        \<script><CR>export default {<CR>}<CR></script>
+        \<CR><CR><style><CR></style>|
         \ iabbrev <buffer> vexp export default {<CR><TAB>name: '',
-        \<CR>data() {<CR><TAB>return {<CR>}<CR>},<CR>};|
+        \<CR>data() {<CR><TAB>return {<CR>}<CR>},<CR>}|
         \ iabbrev <buffer> vdata data() {
         \<CR><TAB>return {
         \<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
-        \ iabbrev <buffer> vcomp components {<CR>},|
+        \ iabbrev <buffer> vsetup setup() {<CR>
+        \<SPACE><SPACE>return {<SPACE>}<CR>}|
+        \ iabbrev <buffer> vcomp components: {<CR>},|
         \ iabbrev <buffer> vcompu computed: {
         \<CR><TAB>fnName() {
         \<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
@@ -65,4 +71,6 @@ augroup abbreviations
         \<CR><TAB>fnName: function(value) {<CR><TAB>return value;<CR>}<CR>},|
         \ iabbrev <buffer> vprop props: {<CR><TAB>propName: {
         \<CR><TAB>type: ,<CR><TAB>default:<CR>},<CR>},|
+        \ iabbrev <buffer> tryc try {<CR>} catch (err) {<CR>}|
+        \ iabbrev <buffer> conl console.log()|
 augroup END

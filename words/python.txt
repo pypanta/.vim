@@ -510,6 +510,7 @@ Base
 base64
 BASE64
 base64mime
+BaseAuthentication
 BaseConfigurator
 BaseContext
 BaseCookie
@@ -525,6 +526,7 @@ BaseHTTPRequestHandler
 BaseListProxy
 BaseManager
 basename
+BaseParser
 BasePermission
 BasePoolProxy
 base_prefix
@@ -1512,6 +1514,7 @@ Deque
 DER_cert_to_PEM_cert
 description
 descriptions
+destroy
 DestroyAPIView
 DestroyModelMixin
 detach
@@ -2210,6 +2213,7 @@ FileType
 FILE_UPLOAD_DIRECTORY_PERMISSIONS
 FILE_UPLOAD_HANDLERS
 FILE_UPLOAD_MAX_MEMORY_SIZE
+FileUploadParser
 FILE_UPLOAD_PERMISSIONS
 FILE_UPLOAD_TEMP_DIR
 file_util
@@ -2383,6 +2387,7 @@ formatyear
 formatyearpage
 form_class
 form_invalid
+FormParser
 FORM_RENDERER
 forms
 formset_factory
@@ -4245,6 +4250,7 @@ Mult
 MULTILINE
 MultipartConversionError
 MultipartInvariantViolationDefect
+MultiPartParser
 MultipleChoiceField
 MULTIPLE_CHOICES
 MultipleHiddenInput
@@ -4630,9 +4636,11 @@ parse_qsl
 parser
 Parser
 PARSER
+parser_classes
 ParserCreate
 parse_request
 ParserError
+parsers
 parse_starttag
 ParsingError
 partial
@@ -5247,6 +5255,7 @@ restore
 result
 resultclass
 retrbinary
+retrieve
 RetrieveAPIView
 RetrieveDestroyAPIView
 RetrieveModelMixin
@@ -5256,6 +5265,7 @@ retrlines
 return
 Return
 return_ok
+reveal_type
 reverse
 __reversed__
 reversed
@@ -7033,4 +7043,7 @@ Z_PARTIAL_FLUSH
 Z_RLE
 Z_SYNC_FLUSH
 Z_TREES
-reveal_type
+default_storage
+permission_object
+paginate_by
+build_absolute_uri
