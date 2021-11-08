@@ -1,6 +1,11 @@
 beforeCreate
 beforeDestroy
+beforeEach
+beforeEnter
 beforeMount
+beforeRouteEnter
+beforeRouteLeave
+beforeRouteUpdate
 beforeUpdate
 click
 components
