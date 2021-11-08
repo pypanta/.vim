@@ -8,44 +8,6 @@ augroup reload_vimrc
     autocmd! bufwritepost ~/.vim/vimrc source %
 augroup END
 
-" Sets the character encoding used inside Vim
-set encoding=utf-8
-
-" save file with Ctrl+S
-inoremap <C-s> <esc>:w<cr>a
-nnoremap <C-s> :w<cr>a
-
-" Better copy & paste
-" When you want to paste large blocks of code into vim, press F2 before you
-" paste. At the bottom you should see ``-- INSERT (paste) --``.
-set pastetoggle=<F2>
-set clipboard=unnamedplus
-
-" Mouse and backspace
-set mouse=a
-set bs=2
-
-" Show cursor line and column
-set cursorline
-set cursorcolumn
-
-" Show wildmenu for completion, when press TAB the possible matches are shown
-set wildmenu
-
-" Rebind <Leader> key
-let mapleader = ","
-
-" Removes highlight of your last search
-" <C> stands for CTRL and therefore <C-l> stands for CTRL+l
-nnoremap <C-n> :nohl<CR>
-
-" easier moving between tabs
-nnoremap <Leader>n <esc>:tabprevious<CR>
-nnoremap <Leader>m <esc>:tabnext<CR>
-nnoremap <silent> <Leader>tm :exe "tabmove" nr2char(getchar())<CR>
-nnoremap <Leader>tn :tabnew<CR>
-nnoremap <Leader>tc :tabclose<CR>
-
 " Show whitespace
 " MUST be inserted BEFORE the colorscheme command
 augroup show_whitespace
@@ -65,17 +27,19 @@ colorscheme wombat256i
 filetype plugin indent on
 syntax on
 
-" Showing line numbers and length
-set number relativenumber " show the line number relative to the line with the cursor
-set textwidth=79 " maximum width of text that is being inserted
-set nowrap " don't automatically wrap on load
-set fo-=t " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
+" Sets the character encoding used inside Vim
+set encoding=utf-8
 
-" easier formatting of paragraphs
-vmap Q gq
-nmap Q gqap
+" Mouse and backspace
+set mouse=a
+set bs=2
+
+" Show cursor line and column
+set cursorline
+set cursorcolumn
+
+" Show wildmenu for completion, when press TAB the possible matches are shown
+set wildmenu
 
 " Useful settings
 set history=700
@@ -88,19 +52,8 @@ set shiftwidth=4
 set shiftround
 set expandtab
 
-" Set two spaces indention for HTML, CSS, JavaScript files
-augroup filetype_indention
-    autocmd!
-    autocmd FileType html,htmldjango,css,javascript,vue
-        \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
-augroup END
-
-" Set htmldjango as default file type for HTML files
-augroup html_filetype
-    autocmd!
-    autocmd FileType html
-        \ setlocal filetype=htmldjango
-augroup END
+" Letting us to leave an edited buffer without saving it
+set hidden
 
 " Make search case insensitive
 set hlsearch
@@ -121,6 +74,60 @@ set autoread
 " This option helps to avoid all the "hit-enter" prompts caused by file
 " messages
 set shortmess=aoOtTIF
+
+" Showing line numbers and length
+set number relativenumber " show the line number relative to the line with the cursor
+set textwidth=79 " maximum width of text that is being inserted
+set nowrap " don't automatically wrap on load
+set fo-=t " don't automatically wrap text when typing
+set colorcolumn=80
+" :hep ctermbg for colors
+highlight ColorColumn ctermbg=8
+
+" Better copy & paste
+" When you want to paste large blocks of code into vim, press F2 before you
+" paste. At the bottom you should see ``-- INSERT (paste) --``.
+set pastetoggle=<F2>
+set clipboard=unnamedplus
+
+" Matching the suffix when searching for file under the cursor with "gf"
+set suffixesadd=.py,.sh,.js,.html,.css,.vue
+
+" Rebind <Leader> key
+let mapleader = ","
+
+" easier formatting of paragraphs
+vmap Q gq
+nmap Q gqap
+
+" save file with Ctrl+S
+inoremap <C-s> <esc>:w<cr>a
+nnoremap <C-s> :w<cr>a
+
+" Removes highlight of your last search
+" <C> stands for CTRL and therefore <C-l> stands for CTRL+l
+nnoremap <C-n> :nohl<CR>
+
+" easier moving between tabs
+nnoremap <Leader>n <esc>:tabprevious<CR>
+nnoremap <Leader>m <esc>:tabnext<CR>
+nnoremap <silent> <Leader>tm :exe "tabmove" nr2char(getchar())<CR>
+nnoremap <Leader>tn :tabnew<CR>
+nnoremap <Leader>tc :tabclose<CR>
+
+" Set two spaces indention for HTML, CSS, JavaScript files
+augroup filetype_indention
+    autocmd!
+    autocmd FileType html,htmldjango,css,javascript,vue
+        \ setlocal tabstop=2 softtabstop=2 shiftwidth=2
+augroup END
+
+" Set htmldjango as default file type for HTML files
+augroup html_filetype
+    autocmd!
+    autocmd FileType html
+        \ setlocal filetype=htmldjango
+augroup END
 
 " ====================
 " WINDOWS
@@ -238,6 +245,11 @@ nnoremap <Leader>vc :tabnew ~/.vim/vimrc<CR>
 " Airline theme
 let g:airline_theme='badwolf'
 let g:airline_powerline_fonts = 1
+" :help airline-customization
+if !exists('g:airline_symbols')
+    let g:airline_symbols = {}
+endif
+let g:airline_symbols.colnr = ' ℅:'
 
 " Settings for CtrlP
 let g:ctrlp_max_height = 30
@@ -266,9 +278,9 @@ nnoremap <Leader>gs :Git<CR>
 nnoremap <Leader>gaa :Git add --all<CR><CR>
 nnoremap <Leader>gc :Gcommit -v<CR>
 nnoremap <Leader>gp :Git push<CR>
-nnoremap <Leader>gl :Glog<CR>
-nnoremap <Leader>gla :Glog --<CR>
-nnoremap <Leader>glc :Glog -- %<CR>
+nnoremap <Leader>gl :Gclog<CR>
+nnoremap <Leader>gla :Gclog --<CR>
+nnoremap <Leader>glc :Gclog -- %<CR>
 nnoremap <Leader>gd :Gdiff<CR>
 nnoremap <Leader>gb :Gblame<CR>
 nnoremap <Leader>gr :Gread<CR>
