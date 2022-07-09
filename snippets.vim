@@ -46,9 +46,9 @@ augroup abbreviations
 
     " Vue JS
     autocmd FileType vue,javascript
-        \ iabbrev <buffer> vtemp <template><CR></template><CR><CR>
-        \<script><CR>export default {<CR>}<CR></script>
-        \<CR><CR><style><CR></style>|
+        \ iabbrev <buffer> vtemp <template><CR></template><CR><CR><BACKSPACE>
+        \<script><CR><BACKSPACE>export default {<CR>}<CR></script>
+        \<CR><CR><BACKSPACE><style><CR><CR><BACKSPACE></style>|
         \ iabbrev <buffer> vexp export default {<CR><TAB>name: '',
         \<CR>data() {<CR><TAB>return {<CR>}<CR>},<CR>}|
         \ iabbrev <buffer> vdata data() {
@@ -70,7 +70,7 @@ augroup abbreviations
         \ iabbrev <buffer> vfil filters: {
         \<CR><TAB>fnName: function(value) {<CR><TAB>return value;<CR>}<CR>},|
         \ iabbrev <buffer> vprop props: {<CR><TAB>propName: {
-        \<CR><TAB>type: ,<CR><TAB>default:<CR>},<CR>},|
+        \<CR><TAB>type: ,<CR><TAB>default: ,<CR><TAB>required:<CR>},<CR>},|
         \ iabbrev <buffer> tryc try {<CR>} catch (err) {<CR>}|
         \ iabbrev <buffer> conl console.log()|
 augroup END

@@ -174,6 +174,29 @@ nnoremap <space> za
 runtime snippets.vim
 
 " ====================
+" COMPLETIONS
+" ====================
+
+" Set dictionary completion
+augroup dictionary_completion
+    autocmd!
+    autocmd FileType text,markdown,html
+        \ setlocal dictionary+=/usr/share/dict/words
+    autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
+    inoremap <F12> <C-x><C-k>
+augroup END
+
+" ====================
+" DOCUMENTATIONS
+" ====================
+
+" Use PyDoc instead of man to lookup the keyword under the cursor
+augroup pydoc
+    autocmd!
+    autocmd BufNewFile,BufRead *py set keywordprg=/usr/bin/pydoc3
+augroup END
+
+" ====================
 " SEARCHING
 " ====================
 
@@ -205,27 +228,18 @@ vnoremap <F3> :s/\%V.*\%V\@!/\=join(sort(split(submatch(0), '\s*,\s*')), ', ')<C
 nnoremap <F3> :%s/import\s*\zs.*/\=join(sort(split(submatch(0), '\s*,\s*')),', ')<CR>
 
 " ====================
-" COMPLETIONS
+" SUBSTITUTIONS
 " ====================
 
-" Set dictionary completion
-augroup dictionary_completion
-    autocmd!
-    autocmd FileType text,markdown,html
-        \ setlocal dictionary+=/usr/share/dict/words
-    autocmd FileType * execute 'setlocal dict+=~/.vim/words/'.&filetype.'.txt'
-    inoremap <F12> <C-x><C-k>
-augroup END
-
-" ====================
-" DOCUMENTATIONS
-" ====================
-
-" Use PyDoc instead of man to lookup the keyword under the cursor
-augroup pydoc
-    autocmd!
-    autocmd BufNewFile,BufRead *py set keywordprg=/usr/bin/pydoc3
-augroup END
+" Quoting comma separated strings inside brackets (),
+" curly {} and square [] brackets
+" '\ze' -- Vim regex for lookahead
+nnoremap <Leader>qsb :s/\v((\w+\s){0,}(\w+))\ze[,)]/'\1'/g<CR>
+nnoremap <Leader>qscb :s/\v((\w+\s){0,}(\w+))\ze[:,}]/'\1'/g<CR>
+nnoremap <Leader>qssb :s/\v((\w+\s){0,}(\w+))\ze[,\]]/'\1'/g<CR>
+" Comment visual selected lines
+vnoremap <Leader>cs# :s/^[^$]/# &/<CR>:nohl<CR>
+vnoremap <Leader>cs/ :s/^[^$]/\/\/ &/<CR>:nohl<CR>
 
 " ====================
 " OTHER MAPPINGS
@@ -237,6 +251,10 @@ xnoremap < <gv
 
 " Open vimrc file
 nnoremap <Leader>vc :tabnew ~/.vim/vimrc<CR>
+
+" Quote word
+nnoremap <leader>q" viw<esc>a"<esc>bi"<esc>lel
+nnoremap <leader>q' viw<esc>a'<esc>bi'<esc>lel
 
 " ====================
 "   PLUGINS SETTINGS

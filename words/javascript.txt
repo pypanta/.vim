@@ -3,6 +3,7 @@ acos
 add
 addEventListener
 anchor
+append
 asin
 atan
 atan2
@@ -15,6 +16,7 @@ ceil
 charAt
 charCodeAt
 classList
+className
 click
 clientWidth
 component
@@ -41,8 +43,11 @@ fontcolor
 fontsize
 for
 forEach
+getAttribute
 getDate
 getDay
+getElementById
+getElementsByClassName
 getFullYear
 getHours
 getMilliseconds
@@ -60,8 +65,10 @@ getUTCMinutes
 getUTCMonth
 getUTCSeconds
 getYear
+hasAttribute
 if
 indexOf
+innerHTML
 innerText
 IntersectionObserver
 italics
@@ -95,15 +102,18 @@ pop
 pow
 push
 querySelector
+querySelectorAll
 random
 reduce
 reduceRight
 remove
+removeAttribute
 replace
 return
 reverse
 round
 search
+setAttribute
 setDate
 setFullYear
 setHours
@@ -162,3 +172,8 @@ undefined
 unescape
 unshift
 valueOf
+prepend
+appendChild
+replaceChild
+insertBefore
+insertAdjacentElement
