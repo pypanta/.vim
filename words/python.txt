@@ -11053,3 +11053,5 @@ DEFAULT_RENDERER_CLASSES
 HTTP_405_METHOD_NOT_ALLOWED
 authentication_classes
 permission_classes
+obtain_auth_token
+HyperlinkedIdentityField

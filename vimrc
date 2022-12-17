@@ -387,6 +387,6 @@ augroup load_plugins
 
     " Vim syntax highlighting for Vue components
     autocmd BufNewFile,BufRead *vue
-        \ packadd vim-javascript |
-        \ set filetype=vue.html
+        \ packadd vim-vue-plugin |
+        \ set filetype=vue
 augroup END
