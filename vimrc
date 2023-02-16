@@ -81,8 +81,20 @@ set textwidth=79 " maximum width of text that is being inserted
 set nowrap " don't automatically wrap on load
 set fo-=t " don't automatically wrap text when typing
 set colorcolumn=80
+set scrolloff=10 " minimal number of screen lines to keep above and below the cursor
 " :hep ctermbg for colors
 highlight ColorColumn ctermbg=8
+
+" Selects the default regexp engine
+" 0 automatic selection, 1 old engine, 2 NFA engine
+set regexpengine=0
+
+" When this option is set, the screen will not be redrawn while executing
+" macros, registers and other commands that have not been typed
+set lazyredraw
+
+" The time in milliseconds for redrawing the display
+set redrawtime=10000
 
 " Better copy & paste
 " When you want to paste large blocks of code into vim, press F2 before you
@@ -255,6 +267,7 @@ nnoremap <Leader>vc :tabnew ~/.vim/vimrc<CR>
 " Quote word
 nnoremap <leader>q" viw<esc>a"<esc>bi"<esc>lel
 nnoremap <leader>q' viw<esc>a'<esc>bi'<esc>lel
+nnoremap <leader>q` viw<esc>a`<esc>bi`<esc>lel
 
 " ====================
 "   PLUGINS SETTINGS
