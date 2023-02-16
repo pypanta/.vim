@@ -46,11 +46,10 @@ augroup abbreviations
 
     " Vue JS
     autocmd FileType vue,javascript
-        \ iabbrev <buffer> vtemp <template><CR></template><CR><CR><BACKSPACE>
-        \<script><CR><BACKSPACE>export default {<CR>}<CR></script>
-        \<CR><CR><BACKSPACE><style><CR><CR><BACKSPACE></style>|
-        \ iabbrev <buffer> vexp export default {<CR><TAB>name: '',
-        \<CR>data() {<CR><TAB>return {<CR>}<CR>},<CR>}|
+        \ iabbrev <buffer> vtemp <template><CR></template><CR><CR>
+        \<script setup><CR></script><CR><CR>
+        \<style scoped><CR><CR></style>|
+        \ iabbrev <buffer> vexp export default {<CR>}|
         \ iabbrev <buffer> vdata data() {
         \<CR><TAB>return {
         \<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
@@ -58,19 +57,20 @@ augroup abbreviations
         \<SPACE><SPACE>return {<SPACE>}<CR>}|
         \ iabbrev <buffer> vcomp components: {<CR>},|
         \ iabbrev <buffer> vcompu computed: {
-        \<CR><TAB>fnName() {
-        \<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
+        \<CR><TAB>fnName() {<CR><TAB>return<CR>},
+        \<CR><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE>},|
         \ iabbrev <buffer> vmet methods: {
-        \<CR><TAB>fnName() {
-        \<CR><TAB>return<CR>}<CR>},<LEFT><LEFT><BACKSPACE><SPACE>|
+        \<CR><TAB>fnName() {<CR><TAB>return<CR>},
+        \<CR><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE>},|
         \ iabbrev <buffer> vcreat created() {<CR>},|
-        \ iabbrev <buffer> vwatd watch: {
-        \<CR><TAB>data: {<CR><TAB>imeddiate: true,
-        \<CR><TAB>deep: true,<CR>handler(newValue, oldValue) {<CR>}<CR>}<CR>},|
         \ iabbrev <buffer> vfil filters: {
-        \<CR><TAB>fnName: function(value) {<CR><TAB>return value;<CR>}<CR>},|
+        \<CR><TAB>fnName: function(value) {<CR><TAB>return value;<CR>
+        \<BACKSPACE><BACKSPACE><BACKSPACE>}<CR>
+        \<BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE>},|
         \ iabbrev <buffer> vprop props: {<CR><TAB>propName: {
-        \<CR><TAB>type: ,<CR><TAB>default: ,<CR><TAB>required:<CR>},<CR>},|
+        \<CR><TAB>type:,<CR><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE>
+        \default:,<CR><TAB><BACKSPACE><BACKSPACE><BACKSPACE><BACKSPACE>
+        \<BACKSPACE>required:<CR><TAB>},<CR>},|
         \ iabbrev <buffer> tryc try {<CR>} catch (err) {<CR>}|
         \ iabbrev <buffer> conl console.log()|
 augroup END
