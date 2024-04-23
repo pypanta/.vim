@@ -12,11 +12,6 @@ git@github.com:Raimondi/delimitMate.git
 git@github.com:scrooloose/nerdtree.git
 git@github.com:vim-airline/vim-airline.git
 git@github.com:tpope/vim-fugitive.git
-git@github.com:prabirshrestha/vim-lsp.git
-git@github.com:mattn/vim-lsp-settings.git
-git@github.com:prabirshrestha/asyncomplete.vim.git
-git@github.com:prabirshrestha/asyncomplete-lsp.vim.git
-git@github.com:prabirshrestha/async.vim.git
 )
 
 # Optional plugins
@@ -27,8 +22,8 @@ git@github.com:nvie/vim-flake8.git
 git@github.com:mgedmin/python-imports.vim.git
 git@github.com:vim-python/python-syntax.git
 git@github.com:pangloss/vim-javascript.git
-# git@github.com:posva/vim-vue.git
 git@github.com:leafOfTree/vim-vue-plugin.git
+git@github.com:yegappan/lsp.git
 )
 
 

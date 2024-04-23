@@ -292,12 +292,6 @@ let g:ctrlp_custom_ignore = {
 " Search for a tag in the current buffer
 nnoremap <Leader>st :CtrlPBufTag<CR>
 
-" Settings for jedi-vim
-"let g:jedi#usages_command = "<leader>z"
-"let g:jedi#popup_on_dot = 0
-"let g:jedi#popup_select_first = 0
-"map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
-
 " NERDTree settings
 " Open NERDTree with Ctrl+m
 nnoremap <C-m> :NERDTreeToggle<CR>
@@ -320,55 +314,6 @@ nnoremap <Leader>ge :Gedit<CR>
 nnoremap <Leader>gm :Gmove<Space>
 nnoremap <Leader>grp :Ggrep<Space>
 
-" Vim LSP (Language Server Protocol)
-function! s:on_lsp_buffer_enabled() abort
-    setlocal omnifunc=lsp#complete
-    setlocal signcolumn=no
-    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
-    nmap <buffer> gd <plug>(lsp-definition)
-    nmap <buffer> gs <plug>(lsp-document-symbol-search)
-    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
-    nmap <buffer> gr <plug>(lsp-references)
-    nmap <buffer> gi <plug>(lsp-implementation)
-    nmap <buffer> gt <plug>(lsp-type-definition)
-    nmap <buffer> <leader>rn <plug>(lsp-rename)
-    nmap <buffer> [g <plug>(lsp-previous-diagnostic)
-    nmap <buffer> ]g <plug>(lsp-next-diagnostic)
-    nmap <buffer> K <plug>(lsp-hover)
-    inoremap <buffer> <expr><c-f> lsp#scroll(+4)
-    inoremap <buffer> <expr><c-d> lsp#scroll(-4)
-
-    let g:lsp_format_sync_timeout = 1000
-    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
-
-    " refer to doc to add more commands
-endfunction
-
-augroup lsp_install
-    au!
-    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
-    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-
-let g:lsp_diagnostics_enabled = 0
-let g:lsp_document_highlight_enabled = 0
-highlight lspReference ctermfg=red guifg=red ctermbg=green guibg=green
-
-" Asyncomplete Vim
-let g:asyncomplete_auto_popup = 0
-
-" Use Tab to show the autocomplete
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
 " Load optional plugins
 augroup load_plugins
     autocmd!
@@ -379,8 +324,8 @@ augroup load_plugins
     autocmd BufNewFile,BufRead *py
         \ packadd vim-flake8 |
         \ packadd python-imports.vim |
-        \ nnoremap <F5> :ImportName<CR> |
-        \ nnoremap <Leader><F5> :ImportNameHere<CR> |
+        \ nnoremap <buffer> <F5> :ImportName<CR> |
+        \ nnoremap <buffer> <Leader><F5> :ImportNameHere<CR> |
         \ packadd python-syntax |
         \ let g:python_highlight_all = 1 |
         \ set filetype=python
@@ -402,4 +347,17 @@ augroup load_plugins
     autocmd BufNewFile,BufRead *vue
         \ packadd vim-vue-plugin |
         \ set filetype=vue.html
+
+    " Vim LSP (Language Server Protocol)
+    " https://github.com/yegappan/lsp/tree/main?tab=readme-ov-file
+    " https://github.com/yegappan/lsp/wiki
+    autocmd BufNewFile,BufRead *py,*js,*ts,*rs,*html,*css
+    \ runtime lsp.vim |
+    \ nnoremap <buffer> <Leader>gtdf :LspGotoDefinition<CR> |
+    \ nnoremap <buffer> <Leader>lsh :LspHover<CR> |
+    \ nnoremap <buffer> <Leader>lshl :LspHighlight<CR> |
+    \ nnoremap <buffer> <Leader>lshlc :LspHighlightClear<CR> |
+    \ nnoremap <buffer> <Leader>lspd :LspPeekDefinition<CR> |
+    \ nnoremap <buffer> <Leader>lspr :LspPeekReferences<CR> |
+    \ nnoremap <buffer> <Leader>lssr :LspShowReferences<CR>
 augroup END
